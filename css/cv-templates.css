@@ -1,0 +1,977 @@
+/* ============================================================
+   CV TEMPLATES STYLING & PERFECT A4 PRINT ENGINE
+   ============================================================ */
+
+/* CSS Variables for CV Theme Customization */
+:root {
+  --cv-primary: #0f2b5c;
+  --cv-secondary: #1d4ed8;
+  --cv-accent: #3b82f6;
+  --cv-sidebar-bg: #0f1e36;
+  --cv-sidebar-text: #f8fafc;
+  --cv-text: #1e293b;
+  --cv-text-light: #64748b;
+  --cv-border: #e2e8f0;
+  --cv-card-bg: #f1f5f9;
+  --cv-gold: #d4af37;
+  --cv-font: 'Kantumruy Pro', 'Battambang', sans-serif;
+  --cv-font-heading: 'Kantumruy Pro', 'Battambang', sans-serif;
+  --cv-scale: 1;
+}
+
+/* 12 Curated Color Themes */
+.theme-navy {
+  --cv-primary: #0f2b5c;
+  --cv-secondary: #1d4ed8;
+  --cv-accent: #3b82f6;
+  --cv-sidebar-bg: #0f1e36;
+  --cv-sidebar-text: #f8fafc;
+  --cv-card-bg: #f1f5f9;
+}
+.theme-gold-black {
+  --cv-primary: #d4af37;
+  --cv-secondary: #b45309;
+  --cv-accent: #f59e0b;
+  --cv-sidebar-bg: #18181b;
+  --cv-sidebar-text: #fafafa;
+  --cv-card-bg: #27272a;
+}
+.theme-peach-coral {
+  --cv-primary: #ea580c;
+  --cv-secondary: #f97316;
+  --cv-accent: #fba677;
+  --cv-sidebar-bg: #f1f3f5;
+  --cv-sidebar-text: #1e293b;
+  --cv-card-bg: #fff7ed;
+}
+.theme-emerald {
+  --cv-primary: #064e3b;
+  --cv-secondary: #059669;
+  --cv-accent: #10b981;
+  --cv-sidebar-bg: #064e3b;
+  --cv-sidebar-text: #f0fdf4;
+  --cv-card-bg: #ecfdf5;
+}
+.theme-indigo {
+  --cv-primary: #312e81;
+  --cv-secondary: #4f46e5;
+  --cv-accent: #6366f1;
+  --cv-sidebar-bg: #1e1b4b;
+  --cv-sidebar-text: #eef2ff;
+  --cv-card-bg: #eef2ff;
+}
+.theme-crimson {
+  --cv-primary: #881337;
+  --cv-secondary: #be123c;
+  --cv-accent: #e11d48;
+  --cv-sidebar-bg: #4c0519;
+  --cv-sidebar-text: #fff1f2;
+  --cv-card-bg: #ffe4e6;
+}
+.theme-monochrome {
+  --cv-primary: #09090b;
+  --cv-secondary: #27272a;
+  --cv-accent: #52525b;
+  --cv-sidebar-bg: #18181b;
+  --cv-sidebar-text: #fafafa;
+  --cv-card-bg: #f4f4f5;
+}
+.theme-cyan {
+  --cv-primary: #155e75;
+  --cv-secondary: #0891b2;
+  --cv-accent: #06b6d4;
+  --cv-sidebar-bg: #083344;
+  --cv-sidebar-text: #ecfeff;
+  --cv-card-bg: #ecfeff;
+}
+.theme-violet {
+  --cv-primary: #581c87;
+  --cv-secondary: #7e22ce;
+  --cv-accent: #9333ea;
+  --cv-sidebar-bg: #3b0764;
+  --cv-sidebar-text: #faf5ff;
+  --cv-card-bg: #f3e8ff;
+}
+.theme-amber {
+  --cv-primary: #78350f;
+  --cv-secondary: #b45309;
+  --cv-accent: #d97706;
+  --cv-sidebar-bg: #451a03;
+  --cv-sidebar-text: #fffbeb;
+  --cv-card-bg: #fef3c7;
+}
+.theme-slate {
+  --cv-primary: #1e293b;
+  --cv-secondary: #334155;
+  --cv-accent: #475569;
+  --cv-sidebar-bg: #0f172a;
+  --cv-sidebar-text: #f8fafc;
+  --cv-card-bg: #f1f5f9;
+}
+.theme-forest {
+  --cv-primary: #14532d;
+  --cv-secondary: #15803d;
+  --cv-accent: #854d0e;
+  --cv-sidebar-bg: #052e16;
+  --cv-sidebar-text: #f0fdf4;
+  --cv-card-bg: #fef9c3;
+}
+
+/* Base CV Document Structure */
+.cv-document {
+  font-family: var(--cv-font);
+  color: var(--cv-text);
+  line-height: 1.55;
+  background: white;
+  width: 210mm;
+  min-height: 297mm;
+  height: auto;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: normal !important;
+}
+
+.cv-document * {
+  box-sizing: border-box;
+}
+
+.cv-section-title {
+  font-family: var(--cv-font-heading);
+  font-size: 12pt;
+  font-weight: 700;
+  letter-spacing: normal !important;
+  font-style: normal !important;
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.35;
+}
+
+.cv-section {
+  margin-bottom: 14px;
+}
+
+/* ============================================================
+   AVATAR SHAPES SYSTEM (FRAME & REPOSITIONING)
+   ============================================================ */
+.cv-avatar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cv-avatar-frame {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #0f172a;
+  box-sizing: border-box;
+  cursor: grab;
+  user-select: none;
+  transition: border-color 0.15s ease, border-width 0.15s ease;
+}
+.cv-avatar-frame:active {
+  cursor: grabbing;
+}
+
+.cv-avatar-img,
+.cv-movable-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+  transition: transform 0.08s ease, object-position 0.08s ease;
+}
+
+.cv-avatar-circle {
+  border-radius: 50%;
+  border-style: solid;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.cv-avatar-rounded {
+  border-radius: 20px;
+  border-style: solid;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.cv-avatar-square {
+  border-radius: 4px;
+  border-style: solid;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.cv-avatar-arch {
+  border-radius: 999px 999px 12px 12px;
+  border-style: solid;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.cv-avatar-oval {
+  border-radius: 50% / 40%;
+  border-style: solid;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.cv-avatar-hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.cv-diamond-avatar-wrap {
+  width: 90px;
+  height: 90px;
+  transform: rotate(45deg);
+  overflow: hidden;
+  border: 3.5px solid var(--cv-gold, #d4af37);
+  box-shadow: 0 0 0 3px #18181b, 0 0 0 4.5px var(--cv-gold, #d4af37);
+  margin: 16px auto 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  cursor: grab;
+  box-sizing: border-box;
+}
+.cv-diamond-avatar-wrap:active {
+  cursor: grabbing;
+}
+.cv-diamond-avatar-wrap img {
+  width: 135px;
+  height: 135px;
+  max-width: none;
+  transform: rotate(-45deg);
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.08s ease, object-position 0.08s ease;
+}
+
+.cv-avatar-hidden {
+  display: none !important;
+}
+
+.cv-avatar-hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   REAL GRAPHIC COUNTRY FLAGS
+   ============================================================ */
+.cv-lang-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 8.5pt;
+  line-height: 1.4;
+}
+.cv-lang-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.cv-flag-img {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  flex-shrink: 0;
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Progress Bars & Star Ratings */
+.cv-progress-bar-wrap {
+  width: 100%;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 2px;
+}
+.cv-sidebar .cv-progress-bar-wrap {
+  background: rgba(255, 255, 255, 0.18);
+}
+.cv-progress-bar-fill {
+  height: 100%;
+  background: var(--cv-secondary);
+  border-radius: 4px;
+}
+.cv-progress-bar-gold {
+  background: linear-gradient(90deg, #d4af37, #f59e0b);
+}
+.cv-progress-bar-peach {
+  background: #ea580c;
+  border: 1px solid #c2410c;
+}
+
+.star-rating {
+  color: #fbbf24;
+  letter-spacing: 2px;
+  font-size: 10pt;
+}
+
+/* Contact Item */
+.cv-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 8.5pt;
+}
+.cv-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  word-break: break-all;
+  line-height: 1.35;
+}
+.cv-contact-item svg {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+/* Skills list */
+.cv-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.cv-skill-badge {
+  font-size: 8pt;
+  font-weight: 600;
+  padding: 2.5px 7px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  display: inline-block;
+}
+
+/* Experience & Education Item */
+.cv-timeline-item {
+  margin-bottom: 10px;
+  position: relative;
+}
+.cv-timeline-item:last-child {
+  margin-bottom: 0;
+}
+.cv-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-bottom: 1px;
+}
+.cv-item-title {
+  font-size: 10pt;
+  font-weight: 700;
+  color: var(--cv-primary);
+  line-height: 1.35;
+}
+.cv-item-subtitle {
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--cv-text);
+  line-height: 1.35;
+}
+.cv-item-date {
+  font-size: 8pt;
+  color: var(--cv-text-light);
+  font-weight: 500;
+}
+.cv-item-desc {
+  font-size: 8.5pt;
+  color: var(--cv-text);
+  line-height: 1.5;
+  margin-top: 2px;
+  white-space: pre-line;
+}
+
+/* References Grid */
+.cv-references-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+.cv-ref-card {
+  font-size: 8pt;
+  line-height: 1.4;
+}
+.cv-ref-name {
+  font-size: 9pt;
+  font-weight: 700;
+  color: var(--cv-primary);
+}
+.cv-ref-role {
+  font-weight: 600;
+  color: var(--cv-text);
+  margin-bottom: 1px;
+}
+.cv-ref-contact {
+  color: var(--cv-text-light);
+}
+
+/* Interests Tags Grid */
+.cv-interests-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.cv-interest-badge {
+  font-size: 8pt;
+  padding: 2.5px 7px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+}
+.cv-sidebar .cv-interest-badge {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+/* ============================================================
+   5 ICONIC LAYOUT ENGINES (PROPORTIONED TO EXACT 1 PAGE A4)
+   ============================================================ */
+
+/* 1. LAYOUT: NAVY CLASSIC EXECUTIVE (Richard Sanchez) */
+.layout-navy-executive {
+  display: grid;
+  grid-template-columns: 72mm 1fr;
+  min-height: 297mm;
+  height: auto;
+  background: white;
+  box-sizing: border-box;
+}
+.layout-navy-executive .cv-sidebar {
+  background: #112a46 !important;
+  color: #f1f5f9;
+  padding: 12mm 10mm;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.layout-navy-executive .cv-sidebar .cv-section-title {
+  color: #ffffff;
+  font-size: 11pt;
+  letter-spacing: normal !important;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 3px;
+}
+.layout-navy-executive .cv-sidebar .cv-contact-item {
+  color: rgba(255, 255, 255, 0.9);
+}
+.layout-navy-executive .cv-sidebar .cv-item-title,
+.cv-sidebar .cv-item-title {
+  color: #ffffff;
+}
+.layout-navy-executive .cv-sidebar .cv-item-subtitle,
+.cv-sidebar .cv-item-subtitle {
+  color: rgba(255, 255, 255, 0.88);
+}
+.layout-navy-executive .cv-sidebar .cv-item-desc,
+.cv-sidebar .cv-item-desc {
+  color: rgba(255, 255, 255, 0.78);
+}
+.layout-navy-executive .cv-sidebar .cv-item-date,
+.cv-sidebar .cv-item-date {
+  color: rgba(255, 255, 255, 0.65);
+}
+.layout-navy-executive .cv-sidebar .cv-timeline-item::before,
+.cv-sidebar .cv-timeline-item::before {
+  background: #38bdf8;
+}
+.layout-navy-executive .cv-main {
+  padding: 12mm 14mm;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.layout-navy-executive .cv-header {
+  margin-bottom: 4px;
+}
+.layout-navy-executive .cv-name {
+  font-size: 22pt;
+  font-weight: 800;
+  letter-spacing: normal !important;
+  color: #1e293b;
+  line-height: 1.15;
+}
+.layout-navy-executive .cv-role {
+  font-size: 11pt;
+  font-weight: 600;
+  letter-spacing: normal !important;
+  color: #64748b;
+  margin-top: 2px;
+}
+.layout-navy-executive .cv-header-divider {
+  width: 100%;
+  height: 2px;
+  background: #1e293b;
+  margin-top: 8px;
+}
+.layout-navy-executive .cv-main .cv-section-title {
+  color: #1e293b;
+  font-size: 11pt;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 3px;
+}
+.layout-navy-executive .cv-timeline-item {
+  position: relative;
+  padding-left: 12px;
+  margin-bottom: 10px;
+}
+.layout-navy-executive .cv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #112a46;
+}
+
+/* 2. LAYOUT: PEACH CAPSULE CREATIVE (Christine Smith) */
+.layout-peach-capsule {
+  padding: 10mm 12mm;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 297mm;
+  height: auto;
+  box-sizing: border-box;
+}
+.layout-peach-capsule .cv-top-hero {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  gap: 14px;
+}
+.layout-peach-capsule .cv-peach-card {
+  background: #fca574 !important;
+  border-radius: 14px;
+  padding: 12px 18px;
+  color: #0f172a;
+}
+.layout-peach-capsule .cv-peach-card .cv-name {
+  font-size: 20pt;
+  font-weight: 800;
+  letter-spacing: normal !important;
+  color: #0f172a;
+  line-height: 1.15;
+}
+.layout-peach-capsule .cv-peach-card .cv-contact-list {
+  margin-top: 4px;
+  font-size: 8.5pt;
+  color: #334155;
+  gap: 3px;
+}
+.layout-peach-capsule .cv-body-grid {
+  display: grid;
+  grid-template-columns: 64mm 1fr;
+  gap: 14px;
+}
+.layout-peach-capsule .cv-left-pill-col {
+  background: #f1f3f5 !important;
+  border-radius: 0 20px 20px 0;
+  padding: 12px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.layout-peach-capsule .cv-left-pill-col .cv-section-title {
+  color: #0f172a;
+  font-size: 11pt;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 2px;
+}
+.layout-peach-capsule .cv-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.layout-peach-capsule .cv-right-col .cv-section-title {
+  color: #0f172a;
+  font-size: 11pt;
+  border-bottom: 2px solid #0f172a;
+  padding-bottom: 2px;
+}
+
+/* 3. LAYOUT: MINIMALIST GREY DIVIDER (Ryley Harber) */
+.layout-minimal-divider {
+  display: grid;
+  grid-template-columns: 66mm 1fr;
+  min-height: 297mm;
+  height: auto;
+  padding: 12mm 12mm;
+  position: relative;
+  box-sizing: border-box;
+}
+.layout-minimal-divider::before {
+  content: '';
+  position: absolute;
+  top: 18mm;
+  bottom: 18mm;
+  left: 76mm;
+  width: 1.5px;
+  background: #cbd5e1;
+}
+.layout-minimal-divider .cv-left-col {
+  padding-right: 14mm;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.layout-minimal-divider .cv-right-col {
+  padding-left: 10mm;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.layout-minimal-divider .cv-left-col .cv-section-title {
+  color: #0f172a;
+  font-size: 11pt;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+.layout-minimal-divider .cv-name {
+  font-size: 28pt;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.1;
+}
+.layout-minimal-divider .cv-role {
+  font-size: 11.5pt;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 3px;
+}
+.layout-minimal-divider .cv-right-col .cv-section-title {
+  color: #0f172a;
+  font-size: 11pt;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 3px;
+}
+
+/* 4. LAYOUT: GOLD DIAMOND PRESTIGE (John James Doe) */
+.layout-gold-diamond {
+  display: grid;
+  grid-template-columns: 72mm 1fr;
+  min-height: 297mm;
+  height: auto;
+  background: white;
+  box-sizing: border-box;
+}
+.layout-gold-diamond .cv-sidebar {
+  background: #18181b !important;
+  color: #f4f4f5;
+  padding: 12mm 10mm;
+  border-right: 3px solid #d4af37;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.layout-gold-diamond .cv-sidebar .cv-section-title {
+  color: #d4af37;
+  font-size: 11pt;
+  letter-spacing: normal !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+  padding-bottom: 3px;
+}
+.layout-gold-diamond .cv-main {
+  padding: 12mm 14mm;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.layout-gold-diamond .cv-name {
+  font-size: 22pt;
+  font-weight: 800;
+  letter-spacing: normal !important;
+  color: #18181b;
+  line-height: 1.15;
+}
+.layout-gold-diamond .cv-role {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: normal !important;
+  text-transform: uppercase;
+}
+.layout-gold-diamond .cv-main .cv-section-title {
+  color: #b45309;
+  font-size: 11pt;
+  letter-spacing: normal !important;
+  border-bottom: 1px solid #fed7aa;
+  padding-bottom: 3px;
+}
+.layout-gold-diamond .cv-timeline-item {
+  position: relative;
+  padding-left: 16px;
+  border-left: 2px solid #d4af37;
+  margin-left: 4px;
+}
+.layout-gold-diamond .cv-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 5px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d4af37;
+  border: 1.5px solid white;
+}
+
+/* 5. LAYOUT: ARCH DOME MODERN RIBBON (Morgan Maxwell) */
+.layout-arch-capsule {
+  display: grid;
+  grid-template-columns: 74mm 1fr;
+  min-height: 297mm;
+  height: auto;
+  background: #ffffff;
+  position: relative;
+  box-sizing: border-box;
+}
+.layout-arch-capsule::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 85px;
+  height: 38px;
+  background: repeating-linear-gradient(45deg, #0284c7, #0284c7 6px, transparent 6px, transparent 12px);
+  pointer-events: none;
+}
+.layout-arch-capsule::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 85px;
+  height: 32px;
+  background: repeating-linear-gradient(45deg, #6366f1, #6366f1 6px, transparent 6px, transparent 12px);
+  pointer-events: none;
+}
+.layout-arch-capsule .cv-sidebar {
+  background: #090d16 !important;
+  color: #f8fafc;
+  margin: 8px 0 8px 8px;
+  border-radius: 80px 80px 14px 14px;
+  padding: 10mm 8mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 9px;
+}
+.layout-arch-capsule .cv-sidebar .cv-avatar-container {
+  margin-bottom: 4px;
+}
+.layout-arch-capsule .cv-sidebar .cv-name {
+  font-size: 16pt;
+  font-weight: 800;
+  letter-spacing: normal !important;
+  color: #ffffff;
+  line-height: 1.2;
+}
+.layout-arch-capsule .cv-sidebar .cv-role {
+  font-size: 10pt;
+  letter-spacing: normal !important;
+  color: #94a3b8;
+  margin-bottom: 3px;
+}
+.layout-arch-capsule .cv-sidebar .cv-section-title {
+  color: #ffffff;
+  font-size: 10pt;
+  letter-spacing: normal !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  justify-content: center;
+  padding-bottom: 2px;
+}
+.layout-arch-capsule .cv-main {
+  padding: 10mm 12mm 10mm 14mm;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.layout-arch-capsule .cv-gold-pill-title {
+  background: linear-gradient(90deg, #78350f 0%, #d97706 100%) !important;
+  color: #ffffff;
+  padding: 3px 16px;
+  border-radius: 999px;
+  font-size: 10pt;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.layout-arch-capsule .cv-interest-box {
+  border: 1.5px solid #ca8a04;
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: #fffbeb !important;
+}
+
+/* Fallback Standard */
+.layout-modern-sidebar {
+  display: grid;
+  grid-template-columns: 70mm 1fr;
+  min-height: 297mm;
+  height: auto;
+  box-sizing: border-box;
+}
+.layout-modern-sidebar .cv-sidebar {
+  background: var(--cv-sidebar-bg) !important;
+  color: var(--cv-sidebar-text);
+  padding: 20mm 12mm;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.layout-modern-sidebar .cv-main {
+  padding: 20mm 14mm;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.layout-modern-sidebar .cv-name {
+  font-size: 23pt;
+  font-weight: 800;
+  color: var(--cv-primary);
+  line-height: 1.15;
+}
+.layout-modern-sidebar .cv-role {
+  font-size: 12.5pt;
+  font-weight: 600;
+  color: var(--cv-secondary);
+  margin-top: 3px;
+}
+
+.layout-gradient-banner {
+  display: flex;
+  flex-direction: column;
+  min-height: 297mm;
+  height: auto;
+  box-sizing: border-box;
+}
+.layout-gradient-banner .cv-banner {
+  background: linear-gradient(135deg, var(--cv-primary) 0%, var(--cv-secondary) 100%) !important;
+  color: white;
+  padding: 16mm 18mm 14mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.layout-gradient-banner .cv-banner .cv-name {
+  font-size: 24pt;
+  font-weight: 800;
+  color: white;
+  line-height: 1.15;
+}
+.layout-gradient-banner .cv-content-wrap {
+  padding: 14mm 18mm;
+  display: grid;
+  grid-template-columns: 1fr 62mm;
+  gap: 18px;
+}
+
+/* ============================================================
+   A4 VECTOR PRINT ENGINE (100% PRECISE A4 FIT, ZERO BLANK PAGE)
+   ============================================================ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0mm !important;
+  }
+
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  html, body {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    height: auto !important;
+    margin: 0mm !important;
+    padding: 0mm !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+  }
+
+  /* Hide everything except CV Document */
+  .top-navbar,
+  .editor-panel,
+  .preview-toolbar,
+  .modal-overlay,
+  .toast-container,
+  .btn,
+  .mobile-view-toggle,
+  .editor-tabs-wrapper,
+  #pdf-sandbox-container,
+  .selection-formatting-bar,
+  .cv-floating-toolbar,
+  .cv-page-split-line,
+  .navbar-more-dropdown,
+  #navbar-more-menu {
+    display: none !important;
+  }
+
+  .app-container,
+  .studio-main,
+  .preview-panel,
+  .preview-viewport {
+    display: block !important;
+    position: static !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    height: auto !important;
+    border: none !important;
+  }
+
+  .cv-sheet-wrapper {
+    box-shadow: none !important;
+    transform: none !important;
+    width: 210mm !important;
+    min-height: 297mm !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important;
+    overflow: visible !important;
+  }
+
+  .cv-section,
+  .cv-timeline-item,
+  .cv-ref-card,
+  .cv-contact-item,
+  .cv-project-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
